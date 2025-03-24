@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Імʼя</th>
+                    <th>Email</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.full_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <a href="{% url 'manage_permissions' user.id %}">Редагувати дозволи</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<a href="{% url 'task_create' %}">+ Add task</a>
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<div>
+    <a href="?completed=true">Completed tasks</a>
+    <a href="?completed=false">In progress tasks</a>
+    <a href="?">All tasks</a>
+</div>
+<br>
+<div>
+    <p>Total: {{ total_tasks }}</p>
+    <p>Done: {{ completed_tasks }}</p>
+    <p>In progress: {{ in_progress_tasks }}</p>
+</div>
+<ul>
+    {% for task in tasks %}
+        <li>
+            {{ task.title }} - {{ task.completed|yesno:'Done, In Progres' }}
+            <a href="{% url 'task_delete' task.id %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No tasks</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,36 @@
+{% load custom_tags %}
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>{% firstof var1 var2 var3 "<strong>backup value</strong>"%}</p>
+        <p>{{ text_var|lower }}</p>
+
+        {% comment "Some comment" %}
+            <p>Comment text {% firstof var1 var2 var3 "<strong>backup value</strong>"%}</p>
+        {% endcomment %}
+
+        {% with total=user.user_permissions.all.count %}
+            <p>Користувач {{ user.email }}  має {{ total }} permission{{total|pluralize}}</p>
+            {{ total|add:'3'}}
+
+            {{'string'|add:'3'}}
+
+            <p>{% multiply 3 7 %}</p>
+        {% endwith %}
+
+        <br>
+        {% uppercasecustom %}
+            Hello world!
+        {% enduppercase %}
+
+        <p>{{ 12345678|add:3|format_number }}</p>
+
+        {% if fruit|in_list:some_fruits %}
+            {{ fruit }} in list
+        {% else %}
+            {{ fruit }} not in list
+        {% endif %}
+        <p></p>
+
+    </body>
+</html>

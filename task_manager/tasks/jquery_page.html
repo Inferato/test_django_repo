@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>API JQuery usage</title>
+        <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <input type="text" id="urlInput" placeholder="Enter Url">
+        <button id="fetchData">Collect data</button>
+        <div id="dataContainer"></div>
+
+        <script>
+            $(document).ready(function () {
+                $("#fetchData").click(function () {
+                    var urlInput = $("#urlInput").val();
+
+                    if (urlInput == "") return;
+                    $.ajax({
+                        url: urlInput,
+                        method: "GET",
+                        success: function(data) {
+                            data.forEach(element => {
+                                Object.entries(element).forEach(([key, value]) => {
+                                        $("#dataContainer").append(
+                                            `<div>
+                                                <p>${key}: ${value}</p>
+                                            </div>`
+                                        );
+                                    }
+                                );
+                            });
+                        },
+                        error: function () {
+                            $("#dataContainer").html("Fetching error")
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
